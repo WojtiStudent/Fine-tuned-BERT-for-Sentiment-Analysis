@@ -3,14 +3,16 @@ import numpy as np
 from transformers import BertTokenizer
 from sklearn.preprocessing import LabelEncoder
 
+# Dictionaries for encoding and decoding labels
 labels_encoding = {label: i for i, label in enumerate(["anger", "fear", "joy", "love", "sadness", "surprise"])}
+labels_decoding = {i: label for i, label in enumerate(["anger", "fear", "joy", "love", "sadness", "surprise"])}
 
 def encode_labels(df):
     df["label"] = df["label"].map(labels_encoding)
     return df
 
 def decode_labels(df):
-    df["label"] = df["label"].map({v: k for k, v in labels_encoding.items()})
+    df["label"] = df["label"].map(labels_decoding)
     return df
 
 def create_data_dataloader(df, batch_size, model_name='bert-base-uncased', num_workers=0):

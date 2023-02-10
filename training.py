@@ -60,7 +60,7 @@ def eval_model(model, data_loader, loss_fn, device):
     return correct_predictions.double() / n_examples, np.mean(losses)
 
 
-def predict(mode, data_loader):
+def predict(model, data_loader):
     model = model.eval()
 
     texts = []
